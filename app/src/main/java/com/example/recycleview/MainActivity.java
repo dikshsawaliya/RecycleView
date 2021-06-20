@@ -1,6 +1,8 @@
 package com.example.recycleview;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     Button btn_addOne;
 
     List<CarBrand> carBrandList = new ArrayList<CarBrand>();
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        recyclerView = findViewById(R.id.lv_carbrandlist);
+
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new RecycleViewAdapter(carBrandList);
+        recyclerView.setAdapter(mAdapter);
     }
 
     private void fillCarBrandList() {
