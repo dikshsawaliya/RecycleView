@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new RecycleViewAdapter(carBrandList);
+        mAdapter = new RecycleViewAdapter(carBrandList, MainActivity.this);
         recyclerView.setAdapter(mAdapter);
     }
 

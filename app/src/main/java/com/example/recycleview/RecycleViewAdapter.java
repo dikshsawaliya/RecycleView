@@ -1,6 +1,7 @@
 package com.example.recycleview;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 
 import java.util.List;
 
@@ -25,15 +29,20 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     @NonNull
-    @org.jetbrains.annotations.NotNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
-        return null;
+    public MyViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_line_carbrand,parent, false);
+        MyViewHolder holder = new MyViewHolder(view);
+
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull RecycleViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecycleViewAdapter.MyViewHolder holder, int position) {
 
+        holder.tv_carName.setText(carBrandList.get(position).getName());
+        holder.tv_dateMade.setText(String.valueOf(carBrandList.get(position).getDateOfManufacturing()));
+        Glide.with(this.context).load(carBrandList.get(position).getImageURL()).into(holder.iv_carPic);
     }
 
     @Override
@@ -47,7 +56,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     TextView tv_dateMade;
 
 
-        public MyViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView) {
+        public MyViewHolder(@NonNull  View itemView) {
             super(itemView);
             iv_carPic = itemView.findViewById(R.id.iv_carbrandPicture);
             tv_carName = itemView.findViewById(R.id.tv_carbrandName);
